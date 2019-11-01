@@ -133,7 +133,7 @@ class  ListaOrdenes extends React.Component {
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
-          <td>{item.date}</td>
+          <td>{item.getNewDate}</td>
           <td>{item.estatus}</td>
           <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={onDelete}/></td>
         </tr>
@@ -258,7 +258,7 @@ class  ListaOrdenes extends React.Component {
         <td>{item.productClave}</td>
         <td>{item.vendedor}</td>
         <td>{item.uge}</td>
-        <td>{item.date}</td>
+        <td></td>
         <td>{item.estatus}</td>
         <td></td>
       </tr>
