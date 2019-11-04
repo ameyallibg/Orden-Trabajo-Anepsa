@@ -6,6 +6,8 @@ import ListaOrdenes from '../components/ListaOrdenes'
 
 import OrdenTrabajo from "../components/OrdenTrabajo"
 import DirectorioClientes from "../components/DirectorioClientes"
+import Visitadores from "../components/Visitadores"
+import Vendedores from "../components/Vendedores"
 import ListadoClientes from "../components/ListadoClientes"
 // import OrdenCreada from "./components/OrdenCreada"
 import { AppContext} from "../AppContext";
@@ -14,13 +16,14 @@ import AnepsaLogo from "../assets/anepsa.png"
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import SettingsIcon from '@material-ui/icons/Settings';
 import {
-  Collapse,
+
   Navbar,
-  NavbarToggler,
+
   NavbarBrand,
   Nav,
-  NavItem,Button, Card, CardBody, Col, Row
+  NavItem,Button,  Col, 
 
  
   } from 'reactstrap';
@@ -31,6 +34,8 @@ OrdenTrabajo.contextType = AppContext;
 ListaOrdenes.contextType = AppContext;
 DirectorioClientes.contextType = AppContext;
 ListadoClientes.contextType =AppContext;
+Visitadores.contextType = AppContext;
+Vendedores.contextType = AppContext;
 
 
 
@@ -39,8 +44,10 @@ class Menu extends Component  {
       super(props);
   
       this.toggle = this.toggle.bind(this);
+      this.toggleConfig = this.toggleConfig.bind(this)
       this.state = {
-        drawerOpen: false
+        drawerOpen: false,
+        drawerOpenConfig: false
       };
     }
     toggle() {
@@ -49,8 +56,14 @@ class Menu extends Component  {
         drawerOpen: !this.state.drawerOpen
       });
     }
+    toggleConfig() {
+      this.setState({
+        // isOpen: !this.state.isOpen,
+        drawerOpenConfig: !this.state.drawerOpenConfig
+      });
+    }
   render(){
-    const{handleLogout, getName, user, dateNew} = this.context
+    const{handleLogout, getName, dateNew} = this.context
   return (
     <BrowserRouter>
   <Col sm={12} className="nav-style" >
@@ -68,6 +81,7 @@ class Menu extends Component  {
         <Col sm={1}>
         
         <Button  color="white "  onClick={this.toggle} style={{ marginBottom: '1rem' }}><MenuIcon className="text-right"/></Button>
+        <Button  color="white "  onClick={this.toggleConfig} style={{ marginBottom: '1rem' }}><SettingsIcon  className="text-right"/></Button>
         </Col>
        
        
@@ -93,12 +107,53 @@ class Menu extends Component  {
             </NavItem>
             <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
             <NavItem  > 
-                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+                         <NavLink   to="/DirectorioClientes">Crear</NavLink>
             
             
             </NavItem>
             <NavItem>Historial de Ventas</NavItem>
             <NavItem>Agenda del vendedor</NavItem>
+           
+            <NavItem>
+           
+         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+    
+            </NavItem>
+
+            <NavItem>
+              
+            </NavItem>
+            </div>
+          </Nav>
+     
+        </Drawer>
+        <Drawer
+        anchor="right"
+        open={this.state.drawerOpenConfig}
+        onClose={this.toggleConfig}
+       >
+        
+
+          <Nav  navbar className="navbar-style">
+            
+            <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggleConfig}/></NavItem>
+            <div className="left ml-10 text-left ">
+          
+            
+            
+       
+            <NavItem><NavLink to="/Visitadores">Visitadores</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+            
+            
+            </NavItem>
+            <NavItem><NavLink to="/Vendedores">Vendedores</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+            
+            
+            </NavItem>
            
             <NavItem>
            
@@ -124,6 +179,7 @@ class Menu extends Component  {
             <Route path="/ListaOrdenes" render={() => <ListaOrdenes />} />
             <Route path="/DirectorioClientes" render={() => <DirectorioClientes />} />
             <Route path="/ListadoClientes" render={() => <ListadoClientes />} />
+            <Route path="/Visitadores" render={() => <Visitadores />} />
            
    </div>
       

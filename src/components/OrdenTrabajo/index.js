@@ -7,9 +7,9 @@ class  OrdenTrabajo extends React.Component {
     
   
     render(){
-    const{ rol, getName, vendedor,uge,  copia,  oferta,
+    const{ rol,nombresClientes,empresaSelect, estatusEmpresa, obtDataCliente, handleEmpresa, getName, vendedor,uge,  copia,  oferta,
     cedido, proyecto, tipoCliente,  
-    nombreCliente, rfcCliente, direccionCliente, delegacionCliente,
+    nombreCliente, rfcCliente, direccionCliente, delegacionCliente, 
     EDOCliente, atencion,telCliente, extTel, 
     nombreSol, rfcSol, direccionSol, EDOSol, telSol, extenSol,emailSol,
     objetivo, otroObj, proposito, otroProp,
@@ -141,18 +141,30 @@ class  OrdenTrabajo extends React.Component {
             <FormGroup >
                 
             <FormGroup row>
+                <Input type="select" name="empresaSelect" value={"empresaSelect"} onChange={handleEmpresa}>
+                    <option value="">Selecciona</option>
+                    {nombresClientes.map(item =>(
+
+                        <option value={item}>{item}</option>
+                    )
+                    )
+                    }
+
+                </Input>
+              
+
             <Col sm={7}>
            
                 <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
                 <Col >
-                    <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
+                    <Input  className="form-size" value={obtDataCliente.nombre} type="text" name="nombreCliente"  /> 
                 </Col> 
                 </Col>
             <Col sm={5}>
           
                 <Label sm={12} >RFC </Label>
                 <Col >
-                    <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
+                    <Input  type="text" value={obtDataCliente.rfc}name="rfcCliente"  onChange={handleChange}/> 
                 </Col>
                 </Col> 
                 
@@ -160,27 +172,27 @@ class  OrdenTrabajo extends React.Component {
            
                 <Label sm={12} >Dirección  </Label>
                 <Col sm={12}>
-                <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
+                <Input  type="text" name="direccionCliente" value={obtDataCliente.direccion} onChange={handleChange} /> 
                 </Col>
             </FormGroup>
             <FormGroup row>  
                 <Col sm={4}>
                 <Label sm={12}>Deleg/Municipio  </Label>
                 <Col>
-                <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
+                <Input  type="text" name="delegacionCliente"     value={obtDataCliente.delegacion} onChange={handleChange} /> 
                 </Col>
                  </Col> 
                  <Col sm={4}>
                
                  <Label  sm={12}>Ciudad/EDO </Label>
                 <Col>
-                 <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
+                 <Input  type="text" name="EDOCliente"   value={obtDataCliente.estado} onChange={handleChange} />
                     </Col>
                  </Col>
                  <Col sm={4}>
                  <Label  sm={12}>Atención </Label>
                 <Col sm={12}>
-                    <Input  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
+                    <Input  type="text" name="atencion" value={obtDataCliente.atencion} onChange={handleChange} /> </Col>
                  </Col>
             </FormGroup>
            
@@ -188,22 +200,23 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={4}>
                 <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
                 <Col>
-                <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
+                <Input    type="text" name="telCliente" value={obtDataCliente.telefono} onChange={handleChange} />
                 </Col>
                  </Col> 
                  <Col sm={2}>
                 <Label sm={12}>Exten </Label>
                 <Col>
-                    <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
+                    <Input type="text"   name="extTel" value={obtDataCliente.ext} onChange={handleChange} />
                     </Col>
                  </Col>
                  <Col sm={6}>
                  <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
                 <Col>
-                <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
+                <Input   type="email" name="emailCliente" value={obtDataCliente.email} onChange={handleChange} /> 
                 </Col>
                 </Col>
             </FormGroup>
+                
            </fieldset>
            <hr/>
            <fieldset className="fieldset">
